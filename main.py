@@ -3,6 +3,7 @@ from creditaccount import CreditAccount
 
 
 def main():
+    #дописать ввод параметров для проверки
     pass
 
 
