@@ -11,7 +11,6 @@ class Account:
         self._balance = float(balance)
         self.operations_history = []
 
-
     def _record_operation(self, op_type: str, amount: float, status: str):
         """Добавляет запись об операции в историю."""
         self.operations_history.append({
@@ -66,13 +65,15 @@ class Account:
         if amount > self._balance:
             # Недостаточно средств — фиксируем неудачную попытку
             self._record_operation("withdraw", amount, "fail")
-            print(f"Недостаточно средств: запрошено {amount}, доступно {self._balance}")
+            print(
+                f"Недостаточно средств:"
+                f"запрошено {amount}, доступно {self._balance}"
+            )
             return False
 
         self._balance -= amount
         self._record_operation("withdraw", amount, "success")
         return True
-
 
     def get_balance(self) -> float:
         """Возвращает текущий баланс."""
@@ -81,7 +82,6 @@ class Account:
     def get_history(self):
         """Возвращает копию истории операций."""
         return [dict(op) for op in self.operations_history]
-
 
     def get_statistics(self) -> dict:
         """Возвращает сводную статистику по операциям."""
@@ -120,22 +120,3 @@ class Account:
                 f"{op['type']:<8} {op['amount']:>10.2f} | "
                 f"баланс: {op['balance_after']:>10.2f} | {op['status']}"
             )
-
-
-
-if __name__ == "__main__":
-    acc = Account("Иван Иванов", 100)
-
-    acc.deposit(50)
-    acc.withdraw(30)
-    acc.withdraw(500)   # неудачная попытка — не хватает средств
-    acc.deposit(-10)    # неудачная попытка — отрицательная сумма
-
-    print(f"\nТекущий баланс: {acc.get_balance()}")
-    print()
-
-    acc.print_history()
-
-    print("\nСтатистика:")
-    for k, v in acc.get_statistics().items():
-        print(f"  {k}: {v}")
