@@ -9,7 +9,9 @@ def main():
     if type_account == "депозит":
         acc = Account(name, person_accaunt)
         acc.deposit(50)
-        acc.withdraw(30)
+        acc.deposit(100)
+        acc.deposit(20)
+        acc.withdraw(130)
         acc.withdraw(500)
         acc.deposit(-10)
         print(f"\nТекущий баланс: {acc.get_balance()}")
@@ -22,6 +24,7 @@ def main():
         credits = float(input("Введите кредитный лимит: "))
         acc = CreditAccount(name, person_accaunt, credits)
         acc.deposit(50)
+        acc.deposit(100)
         acc.withdraw(30)
         acc.withdraw(500)
         acc.withdraw(10)
